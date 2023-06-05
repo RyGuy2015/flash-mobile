@@ -1,11 +1,16 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+// import { StatusBar } from "expo-status-bar";
+import { StyleSheet, View, StatusBar, Platform } from "react-native";
+import { WebView } from "react-native-webview";
+import Constants from "expo-constants";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View style={{ flex: 1, backgroundColor: "#111111" }}>
+      <StatusBar barStyle="light-content" />
+      <WebView
+        style={styles.container}
+        source={{ uri: "https://mktbase.dpslink.com/" }}
+      />
     </View>
   );
 }
@@ -13,8 +18,12 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    borderTopWidth: 1,
+    borderTopColor: "white",
+    ...Platform.select({
+      ios: {
+        marginTop: Constants.statusBarHeight,
+      },
+    }),
   },
 });
